@@ -1,4 +1,4 @@
-# Simple lives System
+# Simple lives system
 ![](https://github.com/LootLocker/unity-lives-system/blob/main/livesGif.gif)
 This is an implementation of a lives system that uses a server to check the time against. Meaning that you can not cheat it easily by changing the time on your device.
 

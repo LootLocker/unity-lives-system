@@ -66,7 +66,7 @@ public class EnergySystemsManager : MonoBehaviour
 
     [Header("Coins")]
     // The current availabel offline coins
-    public double offlineCoins;
+    public double offlineCoins = 0;
 
     [Header("Animations")]
     // Animation curve for newLifeAnimation
@@ -242,11 +242,11 @@ public class EnergySystemsManager : MonoBehaviour
 
         offlineCoins += coinsToGet;
         PlayerPrefs.SetInt("offlineCoins", (int)offlineCoins);
-        coinsInfoText.text = "Offline earnings:\n" + offlineCoins;
+        coinsInfoText.text = "Offline earnings:\n" + offlineCoins.ToString();
         Debug.Log("User had " + previousCoins + " coins, user can get " + coinsToGet + " new coins");
     }
 
-    void UpdateTime(bool updateLifeTime = false, bool updateEnergyTime = false, bool offlineCoins = false)
+    void UpdateTime(bool updateLifeTime = false, bool updateEnergyTime = false, bool updateOfflineEarnings = false)
     {
         livesInfoText.text = "Connecting to server";
         energyInfoText.text = "Connecting to server";
@@ -307,16 +307,16 @@ public class EnergySystemsManager : MonoBehaviour
             if (firstTimePlaying)
             {
                 // The first time we start the game, we should not get any coins
-                coinsInfoText.text = "Offline earnings:\n" + 0;
+                coinsInfoText.text = "Offline earnings:\n" + offlineCoins.ToString();
             }
-            else if(offlineCoins)
+            else if(updateOfflineEarnings)
             {
                 CalculateCoinsGottenOffline(timeLeftOffline);
             }
             else
             {
                 // Not getting any coins, only offline, show nothing
-                coinsInfoText.text = "Offline earnings:\n" + offlineCoins;
+                coinsInfoText.text = "Offline earnings:\n" + offlineCoins.ToString();
             }
 
             // Should we update the time for the lives
@@ -506,7 +506,7 @@ public class EnergySystemsManager : MonoBehaviour
         coins += (int)offlineCoins;
         offlineCoins = 0;
         PlayerPrefs.SetInt("offlineCoins", 0);
-        coinsInfoText.text = "Offline earnings:\n" + offlineCoins;
+        coinsInfoText.text = "Offline earnings:\n" + offlineCoins.ToString();
         AnimateCoin();
         UpdateCoins();
         PlayerPrefs.SetInt("coins", coins);

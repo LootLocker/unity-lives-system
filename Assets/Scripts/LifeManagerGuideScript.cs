@@ -205,7 +205,9 @@ public class LifeManagerGuideScript : MonoBehaviour
         // Do we know that the time we're using is correct?
         if (timeIsFresh)
         {
-            lifeTimer += Time.deltaTime;
+            // We use unscaled delta time when we count,
+            // otherwise the timer would freeze if we pause the game by setting Time.timeScale to 0
+            lifeTimer += Time.unscaledDeltaTime;
             if (lifeTimer >= 1)
             {
                 // Increase gametimer by one second

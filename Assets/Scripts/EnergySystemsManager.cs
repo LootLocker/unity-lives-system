@@ -156,7 +156,7 @@ public class EnergySystemsManager : MonoBehaviour
         while (timer <= duration)
         {
             transformToAnimate.localScale = Vector3.one * interactionAnimationCurve.Evaluate(timer / duration);
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime;
             yield return null;
         }
         transformToAnimate.localScale = Vector3.one;
@@ -316,7 +316,7 @@ public class EnergySystemsManager : MonoBehaviour
             else
             {
                 // Not getting any coins, only offline, show nothing
-                coinsInfoText.text = "Offline earnings:\n" + 0;
+                coinsInfoText.text = "Offline earnings:\n" + offlineCoins;
             }
 
             // Should we update the time for the lives
@@ -351,7 +351,9 @@ public class EnergySystemsManager : MonoBehaviour
         // Do we know that the time we're using is correct?
         if (timeIsFresh)
         {
-            timer += Time.deltaTime;
+            // We use unscaled delta time when we count,
+            // otherwise the timer would freeze if we pause the game by setting Time.timeScale to 0
+            timer += Time.unscaledDeltaTime;
             if (timer >= 1)
             {
                 // Increase gametimer by one second

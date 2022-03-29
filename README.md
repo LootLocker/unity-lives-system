@@ -5,7 +5,7 @@ This is an implementation of a lives system that uses a server to check the time
 
 # How to use
 This implementation is for Unity. Follow this guide:
-> [link] 
+> https://www.lootlocker.io/blog/post/how-to-create-a-simple-lives-system/
 
 to setup an account and install the LootLocker SDK and to see a breakdown of the steps in the script.
 
